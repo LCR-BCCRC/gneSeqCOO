@@ -1,0 +1,18 @@
+Package: gneSeqCOO
+Version: 1.0.0
+Date: 2018-06-05
+Title: An RNASeq-based Cell of Origin classifier
+Authors@R: c(person("Chris", "Bolen", role = c("aut", "cre"),
+                     email = "bolenc@gene.com")
+            )
+Depends: R (>= 3.5.0), DESeq2, Biobase, SummarizedExperiment, methods, stats
+Description: This package contains code for applying a Cell of Origin classifier
+	to RNASeq data. The process consists of three steps: 1) normalizing, 2) calculating 
+	the LPS score, and 3) splitting samples into GCB/ABC based on fixed cut-points.
+License: MIT + file LICENSE
+RoxygenNote: 7.3.1
+LazyData: TRUE
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Encoding: UTF-8

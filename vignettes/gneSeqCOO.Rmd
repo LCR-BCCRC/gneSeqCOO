@@ -1,0 +1,85 @@
+---
+title: "Predicting COO for RNASeq data"
+author: "Christopher Bolen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Predicting COO for RNASeq data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette details a concise example of running the COO classifier on a new RNASeq dataset. This example was run on the Rescomp3 HPC cluster at Genentech, and uses raw data that was output by the Genentech sequencing pipeline.
+
+# Loading the data
+This COO classifier requires that you supply the raw count matrix, as supplied Genentech’s RNASeq processing pipeline. The prediction model was fit using “stranded count” data, and for best performance we recommend you use the same dataset. Theoretically this program may work with unstranded counts, or with data normalized in a different way, but we can’t guarantee consistent results.
+
+Before we can classify the samples, we have to convert our data to a DESeqDataSet. For SummarizedExperiments,
+this is very simple:
+
+```{r,eval=FALSE}
+
+library(DESeq2)
+cds = DESeqDataSet(strandedCtSummary,design=~1)
+
+```
+
+
+Alternatively, if the data is formatted as a matrix, you could use the following command:
+
+```{r,eval=FALSE}
+## counts is a matrix, with rows of features and columns of samples.
+cds = DESeqDataSetFromMatrix(counts,
+  colData=data.frame(ID=colnames(counts)),
+  rowData=data.frame(ID=rownames(counts)),
+  design=~1)
+```
+
+Note that in order for the classifier to work, it is necessary for the row names of our CDS to be in the correct format. The classifier expects the row names to be “Gene IDs”, e.g. “GeneID:9294”, and all genes used in the model must be present in the dataset. For the standard model, there are 21 genes, with the following IDs:
+
+```{r,echo=FALSE,message=FALSE}
+library(gneSeqCOO)
+themodel=coo_GOYA_21gene_igis3$coefficients
+names(themodel)[names(themodel)!="(Intercept)"]
+```
+
+
+# Applying the COO classifier
+
+The COO classifier can be applied to the cds object using the single command, coo_rnaseq(). An example
+is below:
+
+```{r,eval=FALSE}
+
+pred = coo_rnaseq(cds)
+
+```
+
+
+The returned object consists of three columns:
+  - Sample IDs, drawn from the column names of the cds object.
+  - LPS - the Linear Predictor Score, used to split samples into GCB and ABC, and
+  - COO - the Cell of Origin classification; either GCB, ABC, or Unclassified
+  
+  
+# Individual COO classifier functions
+
+The classifier actually consists of two steps, which can be run individually. An example is below:
+
+### Step 1: Normalize
+
+```{r,eval=FALSE}
+norm = coo_normalize(cds)
+```
+
+### Step 2: Apply the classifier.
+
+By default, this uses the built-in “coo\_GOYA\_21gene” classifier, developed from the GOYA dataset. However,
+you have the option of supplying your own version of the classifier (for example, if not all genes are available,
+or if our gene model changes).
+
+```{r,eval=FALSE}
+pred = coo_predict(norm_main)
+```
