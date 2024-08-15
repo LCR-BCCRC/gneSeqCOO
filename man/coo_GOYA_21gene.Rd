@@ -10,7 +10,7 @@
 An object of class 'lm'. Coefficients can be viewed by accessing
    the '$coefficients' slot.
 
-An object of class \code{lm} of length 8.
+An object of class \code{lm} of length 7.
 }
 \source{
 Refer to the COO_Classifier.html file in inst/reports for details

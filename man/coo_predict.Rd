@@ -24,5 +24,5 @@ Function for predicting COO using a normalized RNASeq dataset
 This function uses the model generated on the GOYA dataset to
      predict Cell of Origin on a normalized expression dataset. No subsetting
      needs to be performed, but the expression matrix must have either refseq
-     (e.g. "geneID:00001") or ENSEMBL (e.g. ENSG....) gene IDs as the rownames
+     (e.g. "geneID:7900") or ENSEMBL (e.g. ENSG....) gene IDs as the rownames
 }
