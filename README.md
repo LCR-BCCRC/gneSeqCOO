@@ -23,13 +23,7 @@ cds = DESeqDataSetFromMatrix(counts,
   design=~1)
 ```
 
-Note that in order for the classifier to work, it is necessary for the row names of our CDS to be in the correct format. The classifier currently accepts Refseq “Gene IDs” (formatted as “GeneID:9294”) or Ensembl IDs (ENSG....). All genes used in the model must be present in the dataset. For the standard model, there are 21 genes, with the following IDs:
-
-```{r,echo=FALSE,message=FALSE}
-library(gneSeqCOO)
-themodel=coo_GOYA_21gene_igis3$coefficients
-names(themodel)[names(themodel)!="(Intercept)"]
-```
+Note that in order for the classifier to work, it is necessary for the row names of our CDS to be in the correct format. The classifier currently accepts Refseq “Gene IDs” (formatted as “GeneID:9294”) or Ensembl IDs (ENSG....). Genes in the dataset should not be filtered before running the algorithm, as the complete genome is used to normalize individual samples. 
 
 The COO classifier can be applied to the cds object using the single command, coo_rnaseq(). An example is below:
 
