@@ -63,7 +63,7 @@ refined_coo_rnaseq <- function(cds){
  	cat("Done!\n")
 
 	result = merge(coo,dzsig,by="Sample")
-	result$refined_coo <-
+	result$refined_COO <-
 		ifelse(result$COO == "ABC", "ABC",
 			ifelse(result$DZsig == "DZsig-POS", "DZsig-POS", as.character(result$COO))
 		)
