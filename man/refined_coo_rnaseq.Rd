@@ -14,7 +14,7 @@ a data frame with six columns:
    * Sample names
    * COO LPS score prediction
    * COO class
-	  * DZsig LPS score prediction
+   * DZsig LPS score prediction
    * DZsig class
    * Refined COO class
 }
@@ -24,5 +24,5 @@ Wrapper for running coo_normalize, coo_predict, and dzsig_predict
 \details{
 This function is a wrapper that runs the normalization and both COO
    and DZsig predictions, and then combines the results into a single data frame, 
-	  including the refined COO class.
+   including the refined COO class.
 }

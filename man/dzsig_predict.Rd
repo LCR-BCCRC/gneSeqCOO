@@ -15,7 +15,7 @@ dzsig_predict(norm_eset, model)
 a data frame with three columns: 
    * Sample names
    * LPS score prediction
-   * COO class
+   * DZsig class
 }
 \description{
 Function for predicting DZsig using a normalized RNASeq dataset

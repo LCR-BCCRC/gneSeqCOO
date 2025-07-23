@@ -10,7 +10,7 @@ dzsig_rnaseq(cds)
 \item{cds}{- a DESeqDataSet object, with raw counts in the "counts" slot.}
 }
 \value{
-a matrix of DZsig predictions. See dzsig_predict for more details
+a data frame of DZsig predictions. See dzsig_predict for more details
 }
 \description{
 wrapper for running coo_normalize and dzsig_predict together

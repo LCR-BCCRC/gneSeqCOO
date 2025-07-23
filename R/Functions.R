@@ -7,7 +7,7 @@
 #'     This function intentionally forces a standard procedure for both 
 #'     normalization and modeling, as this should give us the best chance of 
 #'     the model matching up with our training data.
-#' @return a matrix of COO predictions. See coo_predict for more details
+#' @return a data frame of COO predictions. See coo_predict for more details
 #' @export
 
 coo_rnaseq <- function(cds){
@@ -22,7 +22,7 @@ coo_rnaseq <- function(cds){
 #' @description wrapper for running coo_normalize and dzsig_predict together
 #' @param cds - a DESeqDataSet object, with raw counts in the "counts" slot.
 #' @details This function is a wrapper for the core normalization and prediction functions.
-#' @return a matrix of DZsig predictions. See dzsig_predict for more details
+#' @return a data frame of DZsig predictions. See dzsig_predict for more details
 #' @export
 
 dzsig_rnaseq <- function(cds){
@@ -38,12 +38,12 @@ dzsig_rnaseq <- function(cds){
 #' @param cds - a DESeqDataSet object, with raw counts in the "counts" slot.
 #' @details This function is a wrapper that runs the normalization and both COO
 #'    and DZsig predictions, and then combines the results into a single data frame, 
-#' 	  including the refined COO class.
+#'    including the refined COO class.
 #' @return a data frame with six columns: 
 #'    * Sample names
 #'    * COO LPS score prediction
 #'    * COO class
-#' 	  * DZsig LPS score prediction
+#'    * DZsig LPS score prediction
 #'    * DZsig class
 #'    * Refined COO class
 #' @export
@@ -259,7 +259,7 @@ coo_predict <- function(norm_eset, model) {
 #' @return a data frame with three columns: 
 #'    * Sample names
 #'    * LPS score prediction
-#'    * COO class
+#'    * DZsig class
 #' @importFrom stats predict
 #' @importFrom Biobase fData exprs
 #' @export
