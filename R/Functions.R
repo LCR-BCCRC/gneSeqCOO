@@ -255,7 +255,9 @@ coo_predict <- function(norm_eset, model) {
 #' @details This function uses the model generated on the GAMBL dataset to
 #'      predict Dark Zone Signature (DZsig) on a normalized expression dataset. No subsetting
 #'      needs to be performed, but the expression matrix must have either refseq
-#'      (e.g. "geneID:7900") or ENSEMBL (e.g. ENSG....) gene IDs as the rownames
+#'      (e.g. "geneID:7900") or ENSEMBL (e.g. ENSG....) gene IDs as the rownames. 
+#'      Thresholds used for classification are -15.6 and -6.3, as per the original DLBCL90 publication 
+#'      (Ennishi et al, *J Clin Oncol* 2019).
 #' @return a data frame with three columns: 
 #'    * Sample names
 #'    * LPS score prediction

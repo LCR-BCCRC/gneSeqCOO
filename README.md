@@ -49,6 +49,8 @@ dzsig_pred = dzsig_rnaseq(cds)
 
 ```
 
+Thresholds for the DZsig classification are as published for the NanoString DLBCL90 assay (Ennishi et al., *J Clin Oncol* 2019; Data Supplement). 
+
 It is also possible obtain both DZsig and COO calls and generate a combined "refined COO" classification: 
 
 ```{r,eval=FALSE}
